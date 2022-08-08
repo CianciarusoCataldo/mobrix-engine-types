@@ -25,7 +25,11 @@ Type definitions for [MoBrix-engine system](https://github.com/CianciarusoCatald
 
 ## Getting started
 
+<br>
+
 ### Installation
+
+<br>
 
 If you want to use these type definitions inside your project, just install it:
 
