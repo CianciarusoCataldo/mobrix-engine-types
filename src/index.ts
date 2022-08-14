@@ -161,7 +161,7 @@ export interface MoBrixEngineStore<
 > {
   dispatch: MoBrixEngineDispatch<A>;
 
-  getState(): S;
+  getState(): MoBrixEngineCustomState<S>;
 
   subscribe(listener: () => void): MoBrixEngineUnsubscribe;
 
@@ -315,7 +315,7 @@ export type MoBrixEngineConfig<T extends Record<string, any> = {}> =
           config?: MoBrixEngineCustomState;
         }>;
 
-        /** Custom modular reducers */
+        /** Custom Mobrix-engine reducers */
         reducers?: Record<string, MoBrixEngineReducer<any>>;
 
         /** Preloaded initial state */
@@ -328,7 +328,7 @@ export type MoBrixEngineConfig<T extends Record<string, any> = {}> =
         legacyMiddlewares?: Middleware[];
 
         /** Array of functions, called during {@link https://github.com/CianciarusoCataldo/mobrix-designer MoBrix-designer} plugins init process */
-        modularCreatorInteractions?: MoBrixEnginePluginInteraction[];
+        designerInteractions?: MoBrixEnginePluginInteraction[];
       };
 
       /** Additional plugins to load */
@@ -383,7 +383,7 @@ export type MoBrixEnginePluginParameters<
 
   interactions?: MoBrixEnginePluginInteraction<MoBrixEngineConfig>[];
 
-  modularCreatorInteractions?: MoBrixEnginePluginInteraction[];
+  designerInteractions?: MoBrixEnginePluginInteraction[];
 
   before?: MoBrixEngineParser<T, K>;
 
@@ -426,10 +426,7 @@ export type MoBrixEnginePlugin<
  *
  * @copyright Cataldo Cianciaruso 2022
  */
-export type MoBrixEngineParser<
-  T extends Record<string, any> = {},
-  K = any
-> = ({
+export type MoBrixEngineParser<T extends Record<string, any> = {}, K = any> = ({
   store,
   config,
 }: {
